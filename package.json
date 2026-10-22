@@ -41,9 +41,6 @@
   },
   "files": [
     "dist/src",
-    "docs/LANGUAGE.md",
-    "docs/SPEC.md",
-    "editors",
     "README.md",
     "LICENSE"
   ],
