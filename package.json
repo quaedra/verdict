@@ -1,0 +1,41 @@
+{
+  "name": "verdict",
+  "version": "0.1.0",
+  "description": "Decisions as a language primitive: typed, exhaustive, escalating across builtin → Nodd → Jet.",
+  "main": "dist/src/index.js",
+  "directories": {
+    "doc": "docs",
+    "example": "examples",
+    "test": "tests"
+  },
+  "scripts": {
+    "build": "tsc -p .",
+    "typecheck": "tsc -p . --noEmit",
+    "test": "node --import tsx --test tests/*.test.ts && npm run typecheck",
+    "verdict": "tsx src/cli.ts",
+    "demo": "tsx examples/demo.ts"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3"
+  },
+  "type": "module",
+  "types": "dist/src/index.d.ts",
+  "bin": {
+    "verdict": "dist/src/cli.js"
+  },
+  "exports": {
+    ".": "./dist/src/index.js",
+    "./node": "./dist/src/node.js"
+  },
+  "peerDependencies": {
+    "@nodd/node": ">=0.2"
+  },
+  "peerDependenciesMeta": {
+    "@nodd/node": {
+      "optional": true
+    }
+  }
+}

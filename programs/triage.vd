@@ -1,0 +1,61 @@
+// Support triage: three decisions about one ticket. `decide` sends whatever
+// is still unresolved to Jet in a single request.
+
+decision topic: choice "What is the support ticket mainly about?" {
+  billing: "Charges, refunds, invoices, plans, pricing, discounts and payment methods."
+  bug: "Something in the product is broken, crashes, shows errors or behaves wrongly."
+  account: "Login, passwords, 2FA, email or owner changes, access, security and account deletion."
+  how_to: "A question about how to use something the product already does."
+  feature_request: "Asks for something the product doesn't do yet, or suggests an improvement."
+  examples from "../examples/data/support_triage.train.csv"
+  tiers builtin -> jet
+  threshold 0.8
+}
+
+decision needs_human: noul "Does this ticket need a human agent rather than an automated reply?" {
+  tiers jet
+}
+
+decision urgency: score "How urgent is this ticket?" {
+  low: "Can wait a few days; no one is blocked."
+  normal: "Should be handled today."
+  high: "Customer is blocked or losing money now."
+  tiers jet
+}
+
+fn queue(t: topic) -> text {
+  match t {
+    billing => "finance"
+    bug => "engineering"
+    account => "identity"
+    how_to => "docs-bot"
+    feature_request => "product"
+    uncertain => "general"
+  }
+}
+
+fn route(ticket: text) -> text {
+  let r = decide ticket { topic, human: needs_human, urgency }
+  let who = match r.human {
+    yes => "agent"
+    no => "auto-reply"
+    uncertain => "agent"
+  }
+  let priority = match r.urgency {
+    high @ 0.8 => "P1"
+    high => "P2"
+    normal => "P2"
+    low => "P3"
+    uncertain => "P2"
+  }
+  "{queue(r.topic)} / {who} / {priority}   (urgency {round(r.urgency.score, 2)}, topic via {r.topic.source})"
+}
+
+for t in [
+  "I was charged twice this month and need a refund immediately.",
+  "How do I export my reports as CSV?",
+  "It would be nice to have a dark mode in the dashboard.",
+] {
+  print(route(t))
+  print("    {t}")
+}

@@ -1,0 +1,41 @@
+// Comment moderation: the builtin tier answers easy comments, Jet gets the rest.
+
+decision moderate: choice "Decide whether a user comment on a product blog is acceptable to publish." {
+  ok: "Normal comment. Can be positive, negative or off topic, but harmless."
+  spam: "Ads, links to unrelated products or services, SEO junk, scams."
+  toxic: "Insults, harassment, threats or hate toward people or groups."
+  examples from "../examples/data/comment_moderation.train.csv"
+  tiers builtin -> jet
+  threshold 0.85
+}
+
+fn action(comment: text) -> text {
+  match moderate(comment) {
+    ok => "publish"
+    spam => "quarantine"
+    toxic @ 0.9 => "hide"          // hiding is visible to the author: be sure
+    uncertain => "review"
+  }
+}
+
+let comments = [
+  "Thanks, this fixed my build on the first try.",
+  "Earn $500/day from home!!! Visit quick-cash-now.biz",
+  "Only an absolute moron would ship this garbage.",
+  "Not sure I agree with point 3, the numbers look off to me.",
+]
+for c in comments {
+  let o = moderate(c)
+  print("{action(c)}  ← {o}  {c}")
+}
+
+// Score the held-out set and count where each comment went.
+let rows = read_csv("../examples/data/comment_moderation.test.csv")
+let published_bad = 0
+let reviewed = 0
+for r in rows {
+  let a = action(r.text)
+  if a == "publish" and r.label != "ok" { published_bad = published_bad + 1 }
+  if a == "review" { reviewed = reviewed + 1 }
+}
+print("{len(rows)} test comments: {reviewed} sent to review, {published_bad} spam/toxic published")

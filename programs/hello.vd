@@ -1,0 +1,25 @@
+// Hello world in Verdict: a decision is the branch.
+
+decision greeting: choice "Is the user saying hello or goodbye?" {
+  hello: "a greeting"
+  goodbye: "a farewell"
+  examples {
+    "hi there" => hello      "hello!" => hello
+    "good morning" => hello  "hey" => hello
+    "bye" => goodbye         "see you later" => goodbye
+    "good night" => goodbye  "farewell" => goodbye
+  }
+  tiers builtin
+}
+
+fn reply(text: text) -> text {
+  match greeting(text) {
+    hello => "Hello, world!"
+    goodbye => "Goodbye, world!"
+    uncertain => "Hmm, not sure what you mean."
+  }
+}
+
+for t in ["hello world", "bye world", "banana"] {
+  print("{t} → {reply(t)}")
+}

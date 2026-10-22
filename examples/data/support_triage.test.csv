@@ -1,0 +1,61 @@
+text,label
+How do I change the email address on my account?,account
+How do I transfer ownership of the workspace to a colleague?,account
+How do I enable two-factor authentication?,account
+I signed up with Google but want to use a password instead.,account
+How do I make someone an admin?,account
+I can't find where to update my phone number.,account
+Our SSO login stopped letting new users in.,account
+"Remove my account, I don't use this service anymore.",account
+"I accidentally deleted my account, can it be restored?",account
+"I think my account was hacked, the password was changed.",account
+Please verify my identity so I can regain access.,account
+Can I recover an account if I don't remember the email?,account
+"new phone, lost authenticator codes, help",account
+Please unlock my account.,account
+The payment failed and now my account is on hold.,billing
+Do you accept PayPal?,billing
+I was double charged when I upgraded mid-month.,billing
+My coupon code didn't apply at checkout.,billing
+Why am I still being billed for an add-on I removed?,billing
+Can I get a partial refund for the outage days?,billing
+Is there an education discount for students?,billing
+We were promised a 20% discount by your sales rep.,billing
+Do you charge per user or per workspace?,billing
+"We're a startup, is there any special pricing?",billing
+Export to CSV produces an empty file.,bug
+"The page is blank on Safari, works fine in Chrome.",bug
+"Attachments larger than 5 MB fail with ""network error"".",bug
+Copy-paste from Word breaks the formatting completely.,bug
+Keyboard shortcuts stopped working in the editor.,bug
+The desktop app won't launch on Windows 11.,bug
+The progress bar goes backwards during import.,bug
+The app logs me out whenever I switch tabs.,bug
+Characters like ä and ß get corrupted when exported.,bug
+Sorting by date puts March before January.,bug
+The import silently skips rows with commas in them.,bug
+The app crashes on launch after updating to iOS 18.,bug
+The link preview shows someone else's page title.,bug
+Error code E-1042 when connecting the printer.,bug
+"I can't log in, it says ""unexpected error"" even with the right password.",bug
+My payment went through but the page crashed and the order doesn't show.,bug
+Please support right-to-left languages like Arabic.,feature_request
+Feature request: bulk edit for due dates.,feature_request
+Add a way to star or favorite documents.,feature_request
+Suggest adding templates for common workflows.,feature_request
+Let us pin comments to the top of a thread.,feature_request
+Can you add a “focus mode” that hides everything but the editor?,feature_request
+Would be great if charts could be exported as PNG.,feature_request
+Please add a command palette like in VS Code.,feature_request
+Why is there no way to export to PDF? Please add it.,feature_request
+What's the best way to import data from Excel?,how_to
+Where do I find the API key for integrations?,how_to
+Can I schedule a report to be emailed weekly?,how_to
+How do I embed a form on my website?,how_to
+How do I use the API to create a record?,how_to
+Can I use markdown in comments?,how_to
+How do I merge two lists?,how_to
+How do I create a dashboard with multiple charts?,how_to
+How do I translate the interface into German?,how_to
+how do i add a new column,how_to
+Is there a way to get a weekly summary of my team's activity?,how_to

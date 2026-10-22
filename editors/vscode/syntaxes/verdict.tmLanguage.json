@@ -1,0 +1,29 @@
+{
+  "scopeName": "source.verdict",
+  "name": "Verdict",
+  "patterns": [
+    { "name": "comment.line.double-slash.verdict", "match": "//.*$" },
+    {
+      "name": "string.quoted.double.verdict",
+      "begin": "\"", "end": "\"",
+      "patterns": [
+        { "name": "constant.character.escape.verdict", "match": "\\\\[nt\"\\\\{}]" },
+        { "name": "meta.interpolation.verdict", "begin": "\\{", "end": "\\}", "beginCaptures": { "0": { "name": "punctuation.section.interpolation.verdict" } }, "endCaptures": { "0": { "name": "punctuation.section.interpolation.verdict" } }, "patterns": [{ "include": "$self" }] }
+      ]
+    },
+    { "match": "\\b(decision)\\s+([a-z_][a-z0-9_]*)", "captures": { "1": { "name": "keyword.declaration.verdict" }, "2": { "name": "entity.name.type.verdict" } } },
+    { "match": "\\b(fn)\\s+([A-Za-z_][A-Za-z0-9_]*)", "captures": { "1": { "name": "keyword.declaration.verdict" }, "2": { "name": "entity.name.function.verdict" } } },
+    { "name": "storage.type.decision.verdict", "match": "\\b(choice|noul|score)\\b" },
+    { "name": "keyword.control.verdict", "match": "\\b(match|decide|if|else|for|in|while|return|let)\\b" },
+    { "name": "keyword.other.verdict", "match": "\\b(examples|from|tiers|threshold)\\b" },
+    { "name": "support.class.tier.verdict", "match": "\\b(builtin|nodd|jet)\\b" },
+    { "name": "constant.language.uncertain.verdict", "match": "\\buncertain\\b" },
+    { "name": "constant.language.verdict", "match": "\\b(true|false)\\b" },
+    { "name": "keyword.operator.word.verdict", "match": "\\b(and|or|not)\\b" },
+    { "name": "support.type.verdict", "match": "\\b(text|num|bool|list|any)\\b" },
+    { "name": "constant.numeric.verdict", "match": "\\b[0-9][0-9_]*(\\.[0-9]+)?\\b" },
+    { "name": "keyword.operator.verdict", "match": "=>|->|==|!=|<=|>=|[+\\-*/%<>=@]" },
+    { "match": "\\b([a-z_][a-z0-9_]*)\\s*(?=@|=>)", "captures": { "1": { "name": "variable.other.enummember.verdict" } } },
+    { "match": "\\b([A-Za-z_][A-Za-z0-9_]*)\\s*(?=\\()", "captures": { "1": { "name": "entity.name.function.call.verdict" } } }
+  ]
+}

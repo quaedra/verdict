@@ -1,0 +1,13 @@
+{
+  "name": "verdict-vd",
+  "displayName": "Verdict (.vd)",
+  "description": "Syntax highlighting for the Verdict decision language",
+  "version": "0.1.0",
+  "publisher": "quaedra",
+  "engines": { "vscode": "^1.80.0" },
+  "categories": ["Programming Languages"],
+  "contributes": {
+    "languages": [{ "id": "verdict", "aliases": ["Verdict", "vd"], "extensions": [".vd"], "configuration": "./language-configuration.json" }],
+    "grammars": [{ "language": "verdict", "scopeName": "source.verdict", "path": "./syntaxes/verdict.tmLanguage.json" }]
+  }
+}
