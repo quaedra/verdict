@@ -34,7 +34,8 @@ async function load(mod: string): Promise<Map<string, Decision>> {
   const url = pathToFileURL(resolve(mod)).href;
   let m: Record<string, unknown>;
   if (/\.[cm]?tsx?$/.test(mod)) {
-    const { tsImport } = await import("tsx/esm/api");
+    // tsx is an optional peer: only needed to load .ts modules.
+    const { tsImport } = await import("tsx/esm/api").catch(() => fail(`loading ${mod} needs tsx: npm install -D tsx`));
     m = (await tsImport(url, import.meta.url)) as Record<string, unknown>;
   } else m = (await import(url)) as Record<string, unknown>;
   const out = new Map<string, Decision>();

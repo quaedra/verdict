@@ -7,6 +7,9 @@ handled before anything runs. At runtime each decision climbs a chain of models 
 one trained from your examples, [Nodd](https://github.com/quaedra/nodd), then
 [Jet](https://github.com/quaedra/jet) — until one is confident.
 
+[Website](https://quaedra.com/verdict) · [Docs](https://quaedra.com/verdict/docs/) ·
+[Language reference](https://quaedra.com/verdict/docs/language) · [npm](https://www.npmjs.com/package/@quaedra/verdict)
+
 ```vd
 decision moderate: choice "Is this comment ok to publish?" {
   ok: "harmless comment"
@@ -30,6 +33,7 @@ for c in read_lines("inbox.txt") { print("{action(c)}: {c}") }
 ```
 
 ```sh
+npm install @quaedra/verdict     # Node 22+; the CLI is `verdict`
 npx verdict run programs/hello.vd
 npx verdict check programs/triage.vd
 ```
@@ -42,8 +46,8 @@ VS Code highlighting: [`editors/vscode`](editors/vscode)
 The same runtime is a TypeScript library, for decisions inside an existing app:
 
 ```ts
-import { at, choice, decide, jet, match } from "verdict";
-import { builtinFromDisk } from "verdict/node";
+import { at, choice, decide, jet, match } from "@quaedra/verdict";
+import { builtinFromDisk } from "@quaedra/verdict/node";
 
 export const Moderate = choice("comment_moderation", {
   instructions: "Is this comment ok to publish?",
@@ -99,6 +103,9 @@ A tier that throws (Jet down) is logged in `outcome.trail` and skipped. If every
 unsure, you get the most confident answer with `certain: false` → `uncertain` arm.
 
 ## CLI
+
+Loading a TypeScript module (`.ts`) needs `tsx` installed beside Verdict (`npm install -D tsx`);
+`.vd` programs and `.js` modules don't.
 
 ```sh
 npx verdict check examples/moderation.ts
